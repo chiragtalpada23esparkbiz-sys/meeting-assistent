@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meeting Assistant</title>
+  </head>
+  <body>
+    <div class="window">
+
+      <div class="titlebar">
+        <span class="titlebar-label">Meeting Assistant</span>
+        <div class="titlebar-actions">
+          <button class="tb-btn" id="btn-size" title="Toggle size">⤢</button>
+          <button class="tb-btn" id="btn-minimize">−</button>
+          <button class="tb-btn tb-btn-close" id="btn-close">✕</button>
+        </div>
+      </div>
+
+      <div class="content" id="content">
+
+        <!-- Selectors -->
+        <div class="selectors-row">
+          <div class="sel-field">
+            <span class="sel-label">Assistant</span>
+            <select id="assistant-select" class="sel"></select>
+          </div>
+          <div class="sel-field">
+            <span class="sel-label">Mic</span>
+            <select id="mic-select" class="sel"></select>
+          </div>
+        </div>
+
+        <!-- Timer + Controls -->
+        <div class="status-bar">
+          <div class="timer-wrap">
+            <span class="timer" id="timer">00:00:00</span>
+            <span class="status" id="status">Ready</span>
+          </div>
+          <div class="controls">
+            <button id="btn-record" class="btn btn-record">● Record</button>
+            <button id="btn-pause" class="btn btn-ctrl" disabled>Pause</button>
+            <button id="btn-stop" class="btn btn-ctrl" disabled>Stop</button>
+          </div>
+        </div>
+
+        <!-- AI Suggestion — main focus -->
+        <div class="card" id="suggestion-card">
+          <div class="card-header">
+            <span class="card-title">AI Suggestion</span>
+            <div class="detect-controls">
+              <button id="btn-detect-start" class="detect-btn">▶ Ready</button>
+              <button id="btn-detect-stop" class="detect-btn">■ Stop</button>
+              <span class="card-badge" id="card-badge">Waiting...</span>
+            </div>
+          </div>
+          <div class="question-row" id="question-row">
+            <span class="q-label">Q</span>
+            <span class="q-text" id="question-text"></span>
+          </div>
+          <div class="answer" id="suggestion">Start recording — suggestions appear when a question is detected.</div>
+          <div class="card-footer" id="card-footer">
+            <button class="got-it" id="btn-got-it">✓ Got it, next question</button>
+          </div>
+        </div>
+
+        <!-- Transcript — collapsed by default -->
+        <details class="transcript-wrap">
+          <summary class="transcript-toggle">Transcript</summary>
+          <div class="transcript" id="transcript">
+            <span class="placeholder">Transcript will appear here during recording...</span>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </body>
+</html>

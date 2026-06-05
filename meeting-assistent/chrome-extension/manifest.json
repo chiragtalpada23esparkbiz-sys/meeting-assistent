@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Meeting Assistant",
+  "version": "1.0.0",
+  "description": "Real-time transcript from Meeting Assistant — invisible during screen share",
+  "permissions": ["sidePanel", "tabs"],
+  "host_permissions": ["*://meet.google.com/*"],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Meeting Assistant"
+  }
+}
