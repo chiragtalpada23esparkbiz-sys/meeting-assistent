@@ -3,6 +3,7 @@ import { ASSISTANTS } from './assistants';
 import type { AssistantPlugin, Turn } from './assistants';
 
 // Lazy — required at call time so a broken SDK or missing key never crashes startup
+// Uses Anthropic prompt caching to cache the system prompt (profile data) for faster responses
 function streamCompletion(systemPrompt: string, userContent: string) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey || apiKey === 'your_anthropic_key_here') {
@@ -12,9 +13,15 @@ function streamCompletion(systemPrompt: string, userContent: string) {
   const Anthropic = require('@anthropic-ai/sdk').default ?? require('@anthropic-ai/sdk');
   const client = new Anthropic({ apiKey });
   return client.messages.stream({
-    model: 'claude-opus-4-5',
+    model: 'claude-sonnet-4-20250514',
     max_tokens: 300,
-    system: systemPrompt,
+    system: [
+      {
+        type: 'text',
+        text: systemPrompt,
+        cache_control: { type: 'ephemeral' },
+      },
+    ],
     messages: [{ role: 'user', content: userContent }],
   });
 }
@@ -22,6 +29,7 @@ function streamCompletion(systemPrompt: string, userContent: string) {
 let activeAssistant: AssistantPlugin = ASSISTANTS[0];
 const mySpeaker = 'A'; // mic stream is always Speaker A = "You"
 const history: Turn[] = [];
+let isStreaming = false; // Prevent concurrent responses
 
 export function setActiveAssistant(id: string): void {
   const found = ASSISTANTS.find((a) => a.id === id);
@@ -42,6 +50,7 @@ export function getAssistantList(): Array<{ id: string; name: string; descriptio
 
 export function resetHistory(): void {
   history.length = 0;
+  isStreaming = false;
 }
 
 export async function processTurn(turn: Turn): Promise<void> {
@@ -53,9 +62,16 @@ export async function processTurn(turn: Turn): Promise<void> {
   console.log(`[Assistant] shouldRespond: ${willRespond}`);
   if (!willRespond) return;
 
+  // Prevent concurrent responses - skip if already streaming
+  if (isStreaming) {
+    console.log('[Assistant] Skipping — already streaming a response');
+    return;
+  }
+
   const win = BrowserWindow.getAllWindows()[0];
   if (!win) return;
 
+  isStreaming = true;
   win.webContents.send('suggestion-start', { question: turn.text });
 
   try {
@@ -73,5 +89,7 @@ export async function processTurn(turn: Turn): Promise<void> {
     win.webContents.send('suggestion-done');
   } catch (err) {
     win.webContents.send('suggestion-error', (err as Error).message);
+  } finally {
+    isStreaming = false;
   }
 }

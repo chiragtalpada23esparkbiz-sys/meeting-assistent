@@ -1,0 +1,867 @@
+{
+  "personal": {
+    "name": "Chirag Talpada",
+    "title": "AI-Enabled Full Stack Developer",
+    "tagline": "AI-enabled full-stack developer",
+    "years_of_experience": 3,
+    "current_company": "eSparkBiz",
+    "location": "Gujarat, India",
+    "available_for_work": true,
+    "email": "chiragtalpada0227@gmail.com",
+    "phone": "+91 7984296391",
+    "linkedin": "https://www.linkedin.com/in/chirag-talpada",
+    "twitter": "https://x.com/CTalpada78529",
+    "profile_image": "/face_shot.webp",
+    "cv": "/chirag_talpada_fullstack_developer_resume.pdf"
+  },
+
+  "about": {
+    "short_bio": "AI-focused Full Stack Developer with 3+ years of experience specializing in AI-powered applications, React, Next.js, and Node.js.",
+    "detailed_bio": [
+      "I'm a Full-Stack JavaScript Developer with 3+ years of professional experience, currently working at eSparkBiz, where I help build modern web applications used in real-world production environments.",
+      "Full-Stack Expertise: I specialize in building end-to-end web and SaaS products. On the frontend, I work extensively with React and Next.js, crafting clean, responsive, and user-friendly interfaces using Tailwind CSS and shadcn/ui. On the backend, I design and develop reliable, scalable systems using Node.js, along with PostgreSQL, MySQL, and Hasura for API and data orchestration.",
+      "Agentic AI Solutions: Beyond traditional full-stack development, I've been actively building Agentic AI applications. I develop AI agents and RAG-based chatbots using LangChain, LangGraph, Claude Agent SDK, vector databases, and prompt engineering-integrating them into real products that deliver intelligent, context-aware experiences.",
+      "Automation & Workflows: I've developed automation workflows using tools like Windmill and Hyperbrowser to streamline processes and generate intelligent reports, helping teams work smarter and faster.",
+      "End-to-End Ownership: I've implemented authentication systems, integrated Stripe payments, designed database schemas, and contributed to architectural decisions-taking ownership of features from idea to production.",
+      "At my core, I enjoy solving real-world problems, learning new technologies, and building scalable, maintainable software that delivers actual value - not just code."
+    ],
+    "stats": [
+      { "value": 10, "label": "Projects" },
+      { "value": 20, "label": "Technologies Used" },
+      { "value": 3, "label": "Years Experience" },
+      { "value": 9, "label": "Achievements & Awards" }
+    ]
+  },
+
+  "hero": {
+    "roles": [
+      "Full-Stack SaaS Apps",
+      "AI-Powered Solutions",
+      "Agentic AI Solutions",
+      "AI Agents & RAG Apps",
+      "Automation-Focused Systems",
+      "Modern Web Apps"
+    ],
+    "description": "AI-focused full-stack developer with 3+ years of experience building scalable web applications and Agentic AI solutions. I specialize in React and Next.js on the frontend, build reliable backend systems with Node.js, and develop AI agents, RAG-based chatbots, and automation workflows using LangGraph, LangChain, and Claude Agent SDK to deliver production-ready solutions on modern cloud architectures. I also leverage tools like Cursor, ChatGPT, and Claude Code to boost development productivity."
+  },
+
+  "experience": [
+    {
+      "id": "eSparkBiz",
+      "title": "Software Developer",
+      "company": "eSparkBiz",
+      "type": "full-time",
+      "start_date": "Jan 2023",
+      "end_date": "Present",
+      "location": "On site - Ahmedabad, India",
+      "description": "Dedicated Full Stack Developer working directly with international clients and stakeholders to design, build, and scale enterprise-grade SaaS products. Played a key role in delivering complex platforms across renewable energy, healthcare, UX intelligence, and AI-powered B2B SaaS, contributing from early-stage POCs to production systems used by thousands of users.",
+      "responsibilities": [
+        "Worked as a dedicated developer for client projects, collaborating directly with founders, product owners, and stakeholders to deliver business-critical solutions",
+        "Led end-to-end feature development from requirement analysis and technical design to implementation, testing, and production deployment",
+        "Designed and developed scalable full-stack applications using React, Next.js, TypeScript, Node.js, GraphQL, Hasura and PostgreSQL",
+        "Built highly responsive, data-intensive dashboards and workflows, including planners, schedulers, analytics views, and AI-generated reports",
+        "Architected type-safe API layers using GraphQL (Hasura), tRPC, and code generation to ensure reliability and maintainability",
+        "Developed real-time systems using subscriptions, background jobs, queues, and streaming APIs for scheduling, notifications, and AI workflows",
+        "Built and maintained SEO-friendly applications using SSR, dynamic routing, structured data, and meta optimization",
+        "Implemented multi-tenant SaaS architectures with role-based access control and strict organization-level data isolation",
+        "Integrated third-party services including authentication, billing, notifications, file storage, analytics, and AI providers",
+        "Optimized frontend performance by improving Core Web Vitals (LCP, CLS) and reducing page load times across large datasets",
+        "Collaborated closely with backend teams, designers, and QA to deliver pixel-perfect, production-ready features",
+        "Mentored junior developers, conducted code reviews, assessed trainees, and supported internal training programs",
+        "Participated in technical interviews and campus recruitment drives, helping evaluate and onboard engineering talent"
+      ],
+      "achievements": [
+        "Delivered 10+ major production features and multiple enterprise platforms while working as a dedicated client-facing developer",
+        "Successfully converted high-risk POCs into long-term projects, building client trust and enabling product scale and revenue growth",
+        "Reduced application load times by 25–40% through performance optimization, caching strategies, and efficient rendering",
+        "Improved Core Web Vitals by ~30%, significantly enhancing UX and SEO performance",
+        "Increased organic traffic by up to 40% through SSR, SEO best practices, and structured metadata",
+        "Built reusable UI components, reducing code duplication by ~30% and improving development speed across teams",
+        "Built and scaled a multi-organization healthcare platform supporting EHRs, appointments, billing, insurance claims, and audit trails",
+        "Designed and implemented event-sourced financial workflows handling invoices, partial payments, refunds, and credits",
+        "Played a key role in launching 2 AI-powered SaaS products used by a growing user base",
+        "Built RAG-based AI assistants and AI workflows that reduced manual reporting and analysis effort by up to 80%",
+        "Reduced API response times by up to 50% through query optimization and caching",
+        "Received internal recognition for delivering complex AI integrations and hard POCs under tight timelines",
+        "Built a production-grade appointment and scheduling system with live updates, waitlists, and calendar views",
+        "Achieved 99.9% streaming reliability with resumable stream architecture"
+      ],
+      "technologies": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "GraphQL",
+        "Hasura",
+        "PostgreSQL",
+        "LangGraph",
+        "tRPC",
+        "TypeScript",
+        "Redis",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "Redux Toolkit",
+        "OpenAI",
+        "Claude"
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "id": "Master",
+      "degree": "Master of Computer Application",
+      "institution": "Sardar Patel University",
+      "field": "Computer Applications",
+      "start_date": "Apr 2021",
+      "end_date": "Apr 2023",
+      "gpa": "9.55/10",
+      "description": "Graduated with a Master of Computer Applications from Sardar Patel University, specializing in advanced computing and software systems. My postgraduate studies deepened my expertise in professional programming (Java, full-stack frameworks), algorithms, distributed systems, and application design. The curriculum combined theory with significant hands-on experience, including web technologies, system architecture, and large-scale project implementation. This strengthened my ability to architect scalable applications, collaborate effectively on cross-functional teams, and adapt to emerging technologies in cloud, data, and AI-focused environments.",
+      "achievements": [
+        "Active Participant in Technical & Coding Competitions, demonstrating strong problem-solving and algorithmic skills",
+        "Ranked 3rd at College Level for academic excellence in MCA program",
+        "Consistently High Academic Performance with strong focus on advanced computing and software systems",
+        "Recognized for Technical Excellence in programming, database systems, and application development coursework",
+        "Led and Contributed to Complex Academic Projects, applying real-world software engineering and system design principles",
+        "2nd Rank – C Programming Competition - VP & RPTP Science College, Anand"
+      ]
+    },
+    {
+      "id": "Bachelor",
+      "degree": "Bachelor of Computer Application",
+      "institution": "Sardar Patel University",
+      "field": "Computer Applications",
+      "start_date": "Apr 2018",
+      "end_date": "Apr 2021",
+      "gpa": "9.51/10",
+      "description": "Completed a rigorous Bachelor of Computer Applications program at Sardar Patel University, where I built strong foundations in software engineering, database systems, programming (C, Java), and web development. The curriculum emphasized hands-on labs, real-world project work, and problem-solving skills, preparing me to design efficient software solutions and work across full-stack application development. Through academic projects and coursework, I gained expertise in building responsive web apps, managing data systems, and applying core CS principles to practical scenarios.",
+      "achievements": [
+        "Ranked 1st at College Level and 3rd at University Level (Sardar Patel University) for overall academic performance",
+        "1st Rank – State Level C Programming Competition - GH Patel PG Department of Computer Science & Technology — 2019 & 2020",
+        "Runner-Up – C Programming Blind Coding Competition - Charusat University, Changa",
+        "Runner-Up – DB Mania (SQL Competition) - Charusat University, Changa",
+        "Graduated with Distinction",
+        "Class Representative (BCA) — Acted as liaison between faculty and students, coordinated academic and technical activities",
+        "2nd Rank – Web Design Competition - Organized by Sardar Patel University"
+      ]
+    }
+  ],
+
+  "tech_stack": {
+    "frontend": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "HTML5",
+      "CSS3",
+      "Redux"
+    ],
+    "backend": ["Node.js", "Express.js", "GraphQL", "tRPC", "Zod"],
+    "database": [
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "Redis",
+      "Hasura",
+      "Zitadel",
+      "Better-auth"
+    ],
+    "ai_ml": [
+      "OpenAI",
+      "Anthropic",
+      "Claude",
+      "LangChain",
+      "LangGraph",
+      "AI SDK"
+    ],
+    "devops": [
+      "Docker",
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Postman",
+      "PostHog",
+      "Cursor",
+      "Hyperbrowser"
+    ],
+    "services": ["Stripe", "Notion", "Trello", "Jira", "Windmill"]
+  },
+
+  "expertise_areas": [
+    {
+      "title": "Full-Stack Development",
+      "description": "Building complete web applications with React, Next.js, Node.js, and modern JavaScript/TypeScript ecosystems."
+    },
+    {
+      "title": "Agentic AI & Automation",
+      "description": "Building AI agents, agentic workflows, and RAG chatbots using LangChain, LangGraph, Claude Agent SDK, and prompt engineering for intelligent automation."
+    },
+    {
+      "title": "Database & APIs",
+      "description": "Designing efficient database schemas and APIs with PostgreSQL, MySQL, GraphQL, and REST architectures."
+    },
+    {
+      "title": "DevOps & Collaboration",
+      "description": "Implementing Docker containerization, Git version control, and effective project management and teamwork practices."
+    },
+    {
+      "title": "Workflow Automation",
+      "description": "Building automated workflows and intelligent reporting systems to streamline processes."
+    },
+    {
+      "title": "Auth & Payments",
+      "description": "Implementing secure authentication with OAuth/JWT and payment integration with Stripe."
+    }
+  ],
+
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Ben Ford",
+      "role": "Founder",
+      "company": "Mission Ctrl",
+      "content": "Massive well done! Our seasoned health tech entrepreneur was blown away with what you've achieved. You cloned yourself, Chirag — this is a hell of a lot of work for a single day. Well done!",
+      "image": "/testimonials/ben-ford.webp",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Fraser Dunk",
+      "role": "Co-Founder & CEO",
+      "company": "Jurnii LTD",
+      "content": "Stakeholders were super happy: 'This would have taken us three months in-house.' 'We paid $15K for an expert review - this is much better.' Reduced 3-month effort to near-instant delivery.",
+      "image": "/testimonials/fraser-dunk.webp",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "Tristan Dexter",
+      "role": "Chief Experience Officer",
+      "company": "Jurnii LTD",
+      "content": "Chirag is an absolute legend to work with. I handled the Figma designs and UI/UX direction, and he brought everything to life perfectly — pixel-perfect, responsive, and technically solid. Outstanding execution!",
+      "image": "/testimonials/tristan-dexter.webp",
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "name": "Yazid Jibrel",
+      "role": "Associate CIO",
+      "company": "NHS Trust",
+      "content": "Chirag consistently demonstrated strong ownership and the ability to navigate complex challenges. His backend expertise and attention to detail in UX/UI implementation impressed me. Highly recommended!",
+      "image": "/testimonials/yazid-jibrel.webp",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "name": "Christopher Hunt",
+      "role": "Head of UI/UX",
+      "company": "FoshTech",
+      "content": "Chirag has done an amazing job on the front end — super quick delivery. I'm genuinely impressed with how fast things are progressing.",
+      "image": "/testimonials/christopher-hunt.webp",
+      "rating": 5
+    },
+    {
+      "id": 6,
+      "name": "Sanket Lakhani",
+      "role": "Team Lead",
+      "company": "eSparkBiz",
+      "content": "Chirag and the team have delivered exceptional work over the past few months. Their dedication and results speak for themselves. Kudos to the team!",
+      "image": "/testimonials/sanket-lakhani.webp",
+      "rating": 5
+    }
+  ],
+
+  "contact": {
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "chiragtalpada0227@gmail.com",
+        "href": "mailto:chiragtalpada0227@gmail.com"
+      },
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+91 7984296391",
+        "href": "tel:+917984296391"
+      },
+      {
+        "type": "location",
+        "label": "Location",
+        "value": "Gujarat, India"
+      }
+    ],
+    "social_links": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/chirag-talpada"
+      },
+      { "label": "X (Twitter)", "href": "https://x.com/CTalpada78529" }
+    ]
+  },
+
+  "projects": [
+    {
+      "id": "revtik",
+      "slug": "revtik",
+      "title": "Revitk",
+      "subtitle": "AI-Powered Sales Intelligence & Coaching Platform",
+      "description": "Multi-tenant B2B SaaS platform with dual-mode AI (autonomous agent skills + streaming chat) enabling sales teams to analyze calls, track rep performance, and generate sales deliverables with cross-session coaching memory.",
+      "long_description": "Revitk is a multi-tenant B2B SaaS AI platform that combines sales call coaching, performance analytics, and intelligent content generation. The platform enables organizations to load customer-specific GTM (Go-To-Market) frameworks and sales methodologies into AI-delivering autonomous skill execution, streaming chat, and data-driven coaching insights. The platform features a sophisticated dual-mode AI architecture: Autonomous Agent Skills powered by Claude Agent SDK for complex multi-step tasks (call analysis, deliverable generation, GTM extraction) - Streaming Chat Mode for conversational exploration with full customer and GTM context - Sales Coach System with automatic call classification, competency scoring, and cross-session coaching memory, Key differentiators include third-party integrations (Fathom, Zapier) for automatic transcript ingestion, a focus thread system that tracks coaching recommendations across calls, and background job processing for async operations like memory extraction and rep synopsis generation.",
+      "category": "ai",
+      "role": "Full Stack Developer",
+      "duration": "2025 - Present",
+      "thumbnail": "/projects/revtik/revtik-dashboard.webp",
+      "images": [
+        {
+          "src": "/projects/revtik/revtik-dashboard.webp",
+          "alt": "Revtik Dashboard",
+          "caption": "Organization dashboard with AI chat, team management, and analytics"
+        },
+        {
+          "src": "/projects/revtik/revtik-landing.webp",
+          "alt": "Revtik Landing Page",
+          "caption": "AI-powered sales coaching platform for B2B founders"
+        },
+        {
+          "src": "/projects/revtik/revtik-chat-sales-coach.webp",
+          "alt": "Revtik Sales Coach AI Chat",
+          "caption": "AI-powered call review with sales feedback and competency scoring"
+        },
+        {
+          "src": "/projects/revtik/revtik-agent-execution.webp",
+          "alt": "Revtik Agent Execution Timeline",
+          "caption": "Autonomous AI agent skill execution with real-time tool lifecycle tracking"
+        },
+        {
+          "src": "/projects/revtik/revtik-analytics.webp",
+          "alt": "Revtik Analytics Dashboard",
+          "caption": "API usage analytics with token metrics, model usage, and skills breakdown"
+        },
+        {
+          "src": "/projects/revtik/revtik-integrations.webp",
+          "alt": "Revtik Integrations",
+          "caption": "Third-party integrations with Fathom and Zapier for automatic transcript ingestion"
+        }
+      ],
+      "technologies": [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "tRPC",
+        "PostgreSQL",
+        "Hasura GraphQL",
+        "Redis",
+        "BullMQ",
+        "Anthropic Claude",
+        "Claude Agent SDK",
+        "Vercel AI SDK",
+        "MinIO S3",
+        "Puppeteer",
+        "better-auth",
+        "SSE Streaming",
+        "RDF/TTL Ontologies"
+      ],
+      "responsibilities": [
+        "Architected a dual-mode AI system with autonomous agent skills (Claude Agent SDK) and streaming chat via unified skill execution engine",
+        "Designed dynamic GTM context injection system loading customer-specific frameworks into AI workflows with ~35% token reduction via Anthropic prompt caching",
+        "Built autonomous skill execution engine with real-time SSE streaming, tool lifecycle events, and Redis-based status updates",
+        "Developed Sales Coach skill with automatic call type classification (5 frameworks: I.C.L.O.S.E.D., Discovery, Demo, Proposal, One-Call Close) and competency scoring",
+        "Implemented cross-session coaching memory system with role-scoped access (owner sees team, member sees personal) and Redis caching with automatic invalidation",
+        "Built third-party integrations: Fathom OAuth with webhook-based transcript ingestion, Zapier webhook support with HMAC signature verification",
+        "Developed background job processing with BullMQ workers for memory extraction, transcript ingestion, rep synopsis generation, and email delivery",
+        "Implemented Performance Dashboard with rolling (last 5 calls) and all-time competency scores, trend detection, and coaching focus recommendations",
+        "Built focus thread system tracking 'one thing to fix' recommendations across calls with progress check verdicts (yes/partial/no)",
+        "Developed rep matching system that automatically links transcript rep names to organization team members",
+        "Implemented multi-tenant architecture with organization-level data isolation and platform-level admin (Thanos Mode) capabilities",
+        "Built role-based access control with platform roles (Admin) and org roles (Owner, Admin, Member) with granular permissions",
+        "Developed Admin panel with client organization management, read-only chat history view, cross-org analytics, and MinIO storage browser",
+        "Built AI-powered document generators producing PDF, DOCX, Excel, PPTX, and text deliverables with version tracking",
+        "Implemented resumable SSE streaming with reconnection support for network resilience",
+        "Designed global and org-level kill switches for automatic transcript ingestion with discarded call logging"
+      ],
+      "achievements": [
+        "Reduced sales deliverable creation time by ~80% through autonomous AI skill execution",
+        "Achieved ~35% token cost reduction via Anthropic prompt caching on system prompts and GTM context",
+        "Improved AI context load time by ~40% using Redis caching with intelligent invalidation",
+        "Achieved 99.9% streaming reliability with resumable stream architecture and reconnection support",
+        "Built Sales Coach analyzing 5 call types with automatic classification based on structural signals (not user input)",
+        "Implemented competency scoring across 4 dimensions: Process Control, Discovery Depth, Objection Handling, Outcome Positioning",
+        "Developed discovery sub-skills assessment (6 areas) with RAG-style rating (yes/partial/no)",
+        "Built coachability tracking identifying lowest-scoring areas per rep and monitoring improvement attempts across calls",
+        "Implemented focus thread providing AI with historical coaching context for continuity across sessions",
+        "Created automatic transcript ingestion pipeline via Fathom/Zapier webhooks with deduplication and async processing",
+        "Built cross-session coaching memory persisting key insights with role-scoped visibility",
+        "Developed 'Most Improved' rep detection and team-level coaching focus identification",
+        "Implemented Thanos Mode allowing platform admin to access all client GTM frameworks simultaneously",
+        "Built real-time skill execution with SSE streaming of tool lifecycle events and progress tracking",
+        "Created escalation detection system flagging recurring coaching issues for human review",
+        "Implemented transcript content hashing for deduplication across ingestion sources"
+      ],
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "jurnii",
+      "slug": "jurnii",
+      "title": "Jurnii",
+      "subtitle": "AI-Driven UX Intelligence Platform",
+      "description": "Enterprise SaaS platform leveraging AI to deliver comprehensive UX intelligence by analyzing web and mobile experiences with automated UX audit reports.",
+      "long_description": "Jurnii is an enterprise-grade SaaS platform that delivers automated UX intelligence for web and mobile experiences. The platform leverages AI to analyze screenshots, recordings, and design artifacts, generating rich UX audit reports across Performance, Journey, Usability, and Perception dimensions.\n\nWhat started as a proof of concept quickly evolved into a funded, revenue-generating product after stakeholders were impressed by the depth and clarity of the AI-generated reports. The platform is now actively used by clients and generates significant business value.\n\nThe platform offers two core products:\n- **Analysis Product** – Generates detailed UX audit reports for websites, supporting both Expert Reports (in-depth single-site analysis) and Competitor Reports (comparative benchmarking across multiple sites)\n- **Customer 360 (C360)** – Aggregates and visualizes promotional content and marketing campaigns through automated scraping and rich analytics dashboards",
+      "category": "ai",
+      "role": "Full Stack Developer",
+      "duration": "2024-2025",
+      "thumbnail": "/projects/jurnii/jurnii-report-score-tab.webp",
+      "images": [
+        {
+          "src": "/projects/jurnii/jurnii-reports.webp",
+          "alt": "Jurnii Reports Dashboard",
+          "caption": "UX audit reports overview with analysis status"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-search.webp",
+          "alt": "Jurnii Search Interface",
+          "caption": "Intelligent search to execute rich UX reports on any website"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-report-score-tab.webp",
+          "alt": "Jurnii Score Tab",
+          "caption": "Overall UX score with detailed breakdown"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-report-performance-tab.webp",
+          "alt": "Jurnii Performance Analysis",
+          "caption": "Performance metrics and optimization recommendations"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-report-journey-tab.webp",
+          "alt": "Jurnii Journey Analysis",
+          "caption": "User journey mapping and flow analysis"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-report-usability-tab.webp",
+          "alt": "Jurnii Usability Analysis",
+          "caption": "Usability heuristics and accessibility insights"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-report-perception-tab.webp",
+          "alt": "Jurnii Perception Analysis",
+          "caption": "Brand perception and visual design analysis"
+        },
+        {
+          "src": "/projects/jurnii/jurnii-C360-product.webp",
+          "alt": "Jurnii Customer 360",
+          "caption": "C360 product for promotional content aggregation"
+        }
+      ],
+      "technologies": [
+        "Next.js 14",
+        "TypeScript",
+        "LangGraph",
+        "Node js",
+        "Express.js",
+        "Hasura GraphQL",
+        "PostgreSQL",
+        "Redis",
+        "OpenAI",
+        "Tailwind CSS",
+        "tRPC",
+        "Stripe",
+        "MinIO S3",
+        "Inngest",
+        "Liveblocks",
+        "Zitadel",
+        "Windmill"
+      ],
+      "responsibilities": [
+        "Led end-to-end development as Full Stack Developer, owning frontend architecture, report UX, AI workflows, and production rollouts",
+        "Designed and built the entire frontend using Next.js 14 (App Router) with focus on performance and accessibility",
+        "Created highly interactive UX audit reports with tab-based layouts, visual comparisons, and annotation workflows",
+        "Optimized report rendering and data pipelines, reducing report load time from ~30 seconds to under 2 seconds",
+        "Built an AI-powered Report Assistant chatbot using RAG, LangGraph, and PostgreSQL vector extensions",
+        "Developed advanced AI workflows for industry onboarding, journey discovery, and heuristic generation",
+        "Implemented automated journey execution using browser automation and screenshots",
+        "Integrated Stripe subscriptions and billing with plan-based feature access",
+        "Built notification systems and internal automation using Windmill flows",
+        "Managed production data migration, user account creation, and report reassignment in live environments"
+      ],
+      "achievements": [
+        "Played key role in evolving product from POC to funded, revenue-generating SaaS platform",
+        "Reduced UX audit time from weeks to hours by automating analysis through AI-powered workflows",
+        "Improved report load times from 16s to ~2s through optimization",
+        "Designed modular LangGraph architecture enabling parallel execution of 4 assessment categories",
+        "Built scalable competitor benchmarking system processing multiple websites simultaneously",
+        "Achieved type-safe end-to-end development with Zod validation and GraphQL codegen",
+        "Implemented real-time collaboration features for team annotations using Liveblocks"
+      ],
+      "live_url": "https://www.jurnii.io",
+      "featured": true,
+      "order": 2
+    },
+    {
+      "id": "medical-ocean",
+      "slug": "medical-ocean",
+      "title": "Medical Ocean",
+      "subtitle": "Enterprise EHR & Hospital Management Platform",
+      "description": "Comprehensive, enterprise-grade Electronic Health Records (EHR) SaaS platform for managing patient records, appointments, billing, and clinical workflows.",
+      "long_description": "Medical Ocean is a comprehensive, enterprise-grade Electronic Health Records (EHR) SaaS platform designed to help healthcare organizations manage patient records, appointments, billing, and clinical workflows. The platform supports multi-organization and multi-location healthcare operations with real-time scheduling, standardized medical coding, and robust financial workflows.\n\nThe platform promotes interoperability, data-driven decision-making, and HIPAA-compliant healthcare operations for multi-location healthcare organizations. It features comprehensive patient management with demographics, medical history, allergies, vitals tracking, and ICD-11 medical coding integration.",
+      "category": "healthcare",
+      "role": "Full Stack Developer",
+      "duration": "2023 - 2024",
+      "thumbnail": "/projects/medical_ocean/medical-ocean-schedule.webp",
+      "images": [
+        {
+          "src": "/projects/medical_ocean/medical-ocean-schedule.webp",
+          "alt": "Medical Ocean Scheduling",
+          "caption": "Real-time appointment scheduling with calendar integration"
+        },
+        {
+          "src": "/projects/medical_ocean/medical-ocean-worklist.webp",
+          "alt": "Medical Ocean Worklist",
+          "caption": "Practitioner worklist with live appointment status"
+        },
+        {
+          "src": "/projects/medical_ocean/medical-ocean-patient.webp",
+          "alt": "Medical Ocean Patient Management",
+          "caption": "Comprehensive patient record management"
+        },
+        {
+          "src": "/projects/medical_ocean/medical-ocean-invoice.webp",
+          "alt": "Medical Ocean Invoicing",
+          "caption": "invoice management"
+        }
+      ],
+      "technologies": [
+        "Next.js",
+        "Hasura",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "tRPC",
+        "GraphQL",
+        "TypeScript",
+        "Zitadel",
+        "Novu",
+        "Metabase",
+        "MinIO S3",
+        "FullCalendar",
+        "Puppeteer",
+        "Redux Toolkit"
+      ],
+      "responsibilities": [
+        "Worked as dedicated Full Stack Developer, collaborating directly with stakeholders on healthcare workflows",
+        "Designed and developed core modules including Patients, Practitioners, Organizations, Locations, and Appointment Scheduling",
+        "Built real-time scheduling system with worklists, waitlists, and live appointment status using Hasura subscriptions",
+        "Implemented event-sourcing architecture to maintain complete audit trails across healthcare and finance modules",
+        "Developed billing and finance modules including Invoices, Claims, Credit Notes, Refunds, and Payments",
+        "Implemented double-entry accounting logic (debit/credit) supporting partial payments and balance adjustments",
+        "Integrated WHO ICD-11, CPT codes, and dm+d medicine data model for standardized clinical documentation",
+        "Built secure, multi-tenant authentication using Zitadel OAuth with organization-level isolation",
+        "Implemented notifications for appointments and billing events using Novu and scheduled background jobs",
+        "Developed PDF generation workflows for invoices and reports using Puppeteer",
+        "Integrated secure file storage using MinIO/S3 with presigned URLs for medical documents"
+      ],
+      "achievements": [
+        "Delivered scalable, multi-organization healthcare platform supporting real-world clinical workflows",
+        "Built production-grade appointment and scheduling system with live updates and waitlists",
+        "Implemented robust financial system handling invoices, partial payments, credits, and insurance claims",
+        "Designed event-sourced architecture ensuring data consistency for healthcare transactions",
+        "Enabled standardized medical documentation through ICD-11, CPT, and dm+d integrations",
+        "Improved developer productivity through type-safe APIs and GraphQL code generation",
+        "Built type-safe full-stack architecture with GraphQL, tRPC, and TypeScript ensuring zero runtime type errors"
+      ],
+      "featured": true,
+      "order": 3
+    },
+    {
+      "id": "twindo",
+      "slug": "twindo",
+      "title": "Twindo",
+      "subtitle": "Wind Energy Management Platform",
+      "description": "Enterprise-grade, cloud-based platform designed to digitally transform wind energy operations with project planning, workforce management, and analytics.",
+      "long_description": "Twindo is an enterprise-grade, cloud-based platform designed to digitally transform wind energy operations. It streamlines project planning, workforce management, safety and quality workflows, data tracking, and analytics across wind farms through a scalable and highly customizable system tailored for the renewable energy sector.\n\nThe platform enables efficient management of wind farm operations with features like dynamic form building for inspections and safety checks, advanced job planning with multi-slot scheduling, and interactive map integration for visualizing wind sites and operational data.",
+      "category": "enterprise",
+      "role": "Full Stack Developer",
+      "duration": "2023",
+      "thumbnail": "/projects/twindo/twindo-projects.webp",
+      "images": [
+        {
+          "src": "/projects/twindo/twindo-planner.webp",
+          "alt": "Twindo Planner",
+          "caption": "Advanced job planner with multi-slot scheduling"
+        },
+        {
+          "src": "/projects/twindo/twindo-assest-planner.webp",
+          "alt": "Twindo Asset Planner",
+          "caption": "Asset-level planning and maintenance scheduling"
+        },
+        {
+          "src": "/projects/twindo/twindo-forms.webp",
+          "alt": "Twindo Dynamic Forms",
+          "caption": "Drag-and-drop form builder for inspections and safety checks"
+        },
+        {
+          "src": "/projects/twindo/twindo-projects.webp",
+          "alt": "Twindo Projects Dashboard",
+          "caption": "Wind farm projects overview and management"
+        }
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Express.js",
+        "PostgreSQL",
+        "Redux",
+        "REST APIs",
+        "Tailwind CSS"
+      ],
+      "responsibilities": [
+        "Worked as full-stack Developer contributing to multiple core modules of the platform",
+        "Integrated APIs for key entities including Workers, Turbines, Jobs, Sites, and Projects",
+        "Designed and developed dynamic Form Builder with drag & drop features using react-beautiful-dnd",
+        "Built advanced Planner module to assign jobs/tasks to workers using multi-slot scheduling and availability logic",
+        "Developed and maintained complex, data-driven UI dashboards with focus on usability and scalability",
+        "Implemented interactive map integration for visualizing wind sites, turbines, and operational data",
+        "Performed frontend performance optimizations to improve load time and responsiveness",
+        "Collaborated closely with backend teams and product stakeholders to deliver production-ready features",
+        "Customized and extended react-calendar-timeline beyond default library capabilities",
+        "Reworked internal timeline components and styles using custom CSS and layout logic"
+      ],
+      "achievements": [
+        "Successfully delivered multiple business-critical modules used in real-world wind energy operations",
+        "Improved user productivity by enabling efficient job planning and workforce allocation",
+        "Reduced manual effort and errors through customizable digital forms and workflows",
+        "Enhanced application performance and user experience across large datasets",
+        "Implemented smooth auto-scroll dragging behavior for timeline items by patching the library",
+        "Overcame third-party library limitations by modifying internal behavior for large-scale scheduling",
+        "Delivered highly usable planner experience despite framework constraints"
+      ],
+      "live_url": "https://www.twindo.ai",
+      "featured": true,
+      "order": 4
+    }
+  ],
+
+  "achievements": [
+    {
+      "id": "blind-coding",
+      "title": "Blind Coding Competition – Runner-Up",
+      "description": "Secured runner-up position in a Blind Coding competition where participants coded with the monitor turned off for the first 30 minutes, relying on logic and memory, followed by 10 minutes of visible screen time to finalize the solution.",
+      "category": "award",
+      "year": "2019",
+      "organization": "Charotar University of Science and Technology (CHARUSAT)",
+      "image": "/awards/awards-blind-coding.webp",
+      "certificate_image": "/certificates/certificate-blind-coding.webp",
+      "featured": true
+    },
+    {
+      "id": "dbmania",
+      "title": "DB Mania Competition – Runner-Up",
+      "description": "Secured runner-up position in a database management competition focused on efficient relational database design. Designed normalized database schemas and executed complex SQL queries to solve listed problem statements within a strict time limit.",
+      "category": "award",
+      "year": "2019",
+      "organization": "Charotar University of Science and Technology (CHARUSAT)",
+      "image": "/awards/awards-dbmania.webp",
+      "certificate_image": "/certificates/certificate-dbmania.webp",
+      "featured": true
+    },
+    {
+      "id": "state-level-programming-2020",
+      "title": "State Level Programming Competition – 1st Rank",
+      "description": "Secured 1st rank in a state-level programming competition by solving 4–5 algorithmic problem statements within a fixed time frame, competing against top programmers across Gujarat.",
+      "category": "award",
+      "year": "2020",
+      "organization": "Sardar Patel University",
+      "image": "/awards/awards-state-level-programming-2020.webp",
+      "certificate_image": "/certificates/certificate-state-level-programming.webp"
+    },
+    {
+      "id": "state-level-programming-2019",
+      "title": "State Level Programming Competition – 1st Rank",
+      "description": "Secured 1st rank in a state-level programming competition by solving a distinct set of logic-based and coding problem statements within a fixed time limit, demonstrating strong analytical thinking and problem-solving skills.",
+      "category": "award",
+      "year": "2019",
+      "organization": "Sardar Patel University",
+      "image": "/awards/awards-state-level-programming-2019.webp",
+      "certificate_image": "/certificates/certificate-state-level-programming.webp",
+      "featured": true
+    },
+    {
+      "id": "logic-test",
+      "title": "Logic Test Competition – 2nd Rank",
+      "description": "Secured 2nd rank in a logic test competition featuring a timed set of logical reasoning and programming-based MCQ questions, demonstrating strong analytical thinking and problem-solving skills.",
+      "category": "award",
+      "year": "2019",
+      "organization": "V.P. & R.P.T.P Science College - SPU",
+      "image": "/awards/awards-logic-test.webp",
+      "certificate_image": "/certificates/certificate-logic-test.webp"
+    },
+    {
+      "id": "bachelor-rank",
+      "title": "Bachelor's Degree – Academic Rank Holder",
+      "description": "Secured 1st rank at the college level and 3rd rank at the university level for overall academic performance in the Bachelor's degree.",
+      "category": "award",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/awards/awards-bachelor-rank.webp"
+    },
+    {
+      "id": "college-rank-2019",
+      "title": "College Rank Holder – 1st Rank (First Year)",
+      "description": "Secured 1st rank in the first year of college for academic excellence and was featured in a local newspaper for outstanding academic performance.",
+      "category": "award",
+      "year": "2019",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/awards/awards-college-rank.webp"
+    },
+    {
+      "id": "college-rank-banner",
+      "title": "College Topper Recognition Banner",
+      "description": "Recognition banner displayed by the college honoring Bachelor's degree toppers, where I was featured as one of the top-performing students for academic excellence.",
+      "category": "recognition",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/recognition/recognitions-banner-college-rank.webp"
+    },
+    {
+      "id": "college-rank-newspaper-2019",
+      "title": "University Rank Holder – 3rd Rank (2nd Semester) News Coverage",
+      "description": "Local newspaper coverage recognizing achievement of 3rd rank in the university for the 2nd semester by securing a 9.55 GPA, highlighting strong academic performance at the university level.",
+      "category": "recognition",
+      "year": "2019",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/recognition/recognitions-newspapper-college-rank-2019.webp"
+    },
+    {
+      "id": "college-rank-2018",
+      "title": "University Rank Holder – Consistent 3rd Rank (Semesters 1–4) News Coverage",
+      "description": "Local newspaper coverage recognizing consistent achievement of 3rd rank in university-level examinations from 1st to 4th semester, highlighting sustained academic excellence across multiple semesters.",
+      "category": "recognition",
+      "year": "2018",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/recognition/recognitions-newspapper-college-rank-2018.webp"
+    },
+    {
+      "id": "programming-competition-newspaper",
+      "title": "State Level Programming Competition – 1st Rank News Coverage",
+      "description": "Local newspaper coverage recognizing achievement of 1st rank in a state-level programming competition, highlighting competitive programming skills and excellence among participants across Gujarat.",
+      "category": "recognition",
+      "year": "2019",
+      "organization": "Gujarat State",
+      "image": "/recognition/recognitions-newspapper-programming-competetion-rank.webp"
+    },
+    {
+      "id": "programming-rank-newspaper",
+      "title": "College Pride – Multiple Programming Competition Wins (News Coverage)",
+      "description": "Local newspaper coverage recognizing me as the pride of the college for winning multiple programming competitions and securing multiple 1st ranks, highlighting consistent excellence in competitive programming.",
+      "category": "recognition",
+      "year": "2019",
+      "organization": "Gujarat State",
+      "image": "/recognition/recognitions-newspapper-programming-rank.webp"
+    },
+    {
+      "id": "college-recognition",
+      "title": "College Recognition Award",
+      "description": "Received special recognition from the college for achieving multiple ranks in programming competitions during the academic year, acknowledging consistent performance and technical excellence.",
+      "category": "award",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/awards/awards-college-recognition.webp",
+      "certificate_image": "/certificates/certificate-college-recognition.webp"
+    },
+    {
+      "id": "class-representative",
+      "title": "Class Representative – Leadership Recognition",
+      "description": "Received formal recognition from the college for serving as Class Representative in 2019, effectively managing class coordination, communication with faculty, and academic responsibilities throughout the year.",
+      "category": "award",
+      "year": "2019",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/awards/awards-class-representative.webp"
+    },
+    {
+      "id": "cert-blind-coding",
+      "title": "Blind Coding Competition – Runner-Up Certificate",
+      "description": "Certificate awarded for securing the runner-up position in the Blind Coding competition at Charotar University of Science and Technology (CHARUSAT), recognizing logical reasoning, coding accuracy, and problem-solving under restricted visibility conditions.",
+      "category": "certificate",
+      "year": "2019",
+      "organization": "Charotar University of Science and Technology (CHARUSAT)",
+      "image": "/certificates/certificate-blind-coding.webp"
+    },
+    {
+      "id": "cert-dbmania",
+      "title": "DB Mania Competition – Runner-Up Certificate",
+      "description": "Certificate awarded for securing the runner-up position in the DB Mania database management competition at Charotar University of Science and Technology (CHARUSAT), recognizing efficient relational database design and strong SQL problem-solving skills.",
+      "category": "certificate",
+      "year": "2019",
+      "organization": "Charotar University of Science and Technology (CHARUSAT)",
+      "image": "/certificates/certificate-dbmania.webp"
+    },
+    {
+      "id": "cert-state-level-programming",
+      "title": "State Level Programming Competition – 1st Rank Certificates",
+      "description": "Certificate awarded for securing 1st rank in the State Level Programming Competition organized by Sardar Patel University, recognizing excellence in algorithmic and logic-based problem solving across multiple years (2019 and 2020).",
+      "category": "certificate",
+      "year": "2019-2020",
+      "organization": "Sardar Patel University",
+      "image": "/certificates/certificate-state-level-programming.webp"
+    },
+    {
+      "id": "cert-logic-test",
+      "title": "Logic Test Competition – 2nd Rank Certificate",
+      "description": "Certificate awarded for securing 2nd rank in the Logic Test competition at V.P. & R.P.T.P Science College, Sardar Patel University (SPU), recognizing strong logical reasoning and programming-based problem-solving skills.",
+      "category": "certificate",
+      "year": "2019",
+      "organization": "V.P. & R.P.T.P Science College - SPU",
+      "image": "/certificates/certificate-logic-test.webp"
+    },
+    {
+      "id": "cert-college-recognition",
+      "title": "College Recognition Award Certificate",
+      "description": "Certificate awarded for achieving multiple ranks in programming competitions during the academic year, recognizing consistent performance, technical excellence, and contributions to the college.",
+      "category": "certificate",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/certificates/certificate-college-recognition.webp"
+    },
+    {
+      "id": "bca-distinction",
+      "title": "Bachelor's Degree – Academic Rank Certificate",
+      "description": "Certificate awarded for outstanding academic performance in the Bachelor's degree program, securing 1st rank at the college level and 3rd rank at the university level.",
+      "category": "certificate",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/certificates/certificate-bca-distinction.webp"
+    },
+    {
+      "id": "university-distinction",
+      "title": "University Examination – Distinction Certificate",
+      "description": "Certificate awarded by the college for securing distinction in the university examination, recognizing strong academic performance at the university level.",
+      "category": "certificate",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/certificates/certificate-university-distinction.webp"
+    },
+    {
+      "id": "distinction",
+      "title": "Academic Distinction & Professional Training Certificate",
+      "description": "Certificate recognizing academic distinction for securing 1st rank in the Bachelor's degree first semester, along with successful completion of professional training in website development.",
+      "category": "certificate",
+      "year": "2020",
+      "organization": "VNSGU University",
+      "image": "/certificates/certificate-distinction.webp"
+    },
+    {
+      "id": "farewell-recognition",
+      "title": "Farewell Ceremony – Academic & Contribution Recognition",
+      "description": "Honored by the college trust chairman during the farewell ceremony for outstanding academic achievements and significant contributions, including winning multiple competitive programming competitions.",
+      "category": "recognition",
+      "year": "2020",
+      "organization": "C P Patel & F H Shah Commerce College - SPU",
+      "image": "/recognition/recognitions-farewell.webp"
+    }
+  ]
+}

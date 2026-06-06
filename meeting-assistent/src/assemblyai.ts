@@ -8,6 +8,7 @@ type Transcriber = ReturnType<InstanceType<typeof AssemblyAI>['streaming']['tran
 
 let micTranscriber: Transcriber | null = null;
 let systemTranscriber: Transcriber | null = null;
+let sessionsActive = false;
 
 function createTranscriber(apiKey: string): Transcriber {
   const client = new AssemblyAI({ apiKey });
@@ -41,6 +42,15 @@ function attachHandlers(t: Transcriber, speaker: 'A' | 'B', label: string): void
 
   t.on('close', (code: number) => {
     console.log(`[AssemblyAI] ${label} closed — code: ${code}`);
+    // If socket closes unexpectedly while sessions should be active, notify UI
+    if (sessionsActive) {
+      console.warn(`[AssemblyAI] ${label} closed unexpectedly, marking sessions inactive`);
+      sessionsActive = false;
+      transcriptEvents.emit('transcript', {
+        type: 'error',
+        text: `Connection lost (${label}). Please restart recording.`,
+      });
+    }
   });
 }
 
@@ -62,18 +72,36 @@ export async function startSessions(sessionId: string): Promise<void> {
     systemTranscriber.connect(),
   ]);
 
+  sessionsActive = true;
   console.log(`[AssemblyAI] Both sessions ready — session: ${sessionId}`);
 }
 
 export function sendMicPcm(buffer: ArrayBuffer): void {
-  micTranscriber?.sendAudio(buffer);
+  if (!sessionsActive || !micTranscriber) return;
+  try {
+    micTranscriber.sendAudio(buffer);
+  } catch (err) {
+    // Socket closed unexpectedly - stop sending
+    console.warn('[AssemblyAI] Mic socket closed unexpectedly, stopping sends');
+    sessionsActive = false;
+  }
 }
 
 export function sendSystemPcm(buffer: ArrayBuffer): void {
-  systemTranscriber?.sendAudio(buffer);
+  if (!sessionsActive || !systemTranscriber) return;
+  try {
+    systemTranscriber.sendAudio(buffer);
+  } catch (err) {
+    // Socket closed unexpectedly - stop sending
+    console.warn('[AssemblyAI] System socket closed unexpectedly, stopping sends');
+    sessionsActive = false;
+  }
 }
 
 export async function stopSessions(): Promise<void> {
+  // Set flag first to prevent any incoming PCM from being sent
+  sessionsActive = false;
+
   await Promise.allSettled([
     micTranscriber?.close(),
     systemTranscriber?.close(),

@@ -1,4 +1,5 @@
 import type { AssistantPlugin, Turn } from './types';
+import { buildProfileContext } from './profileContext';
 
 const QUESTION_PATTERNS = [
   /\?/,
@@ -23,6 +24,24 @@ function recentHistory(history: Turn[], n = 6): string {
     .join('\n');
 }
 
+const profileContext = buildProfileContext();
+
+const baseSystemPrompt = `You are an expert interview coach. The candidate is in a live interview RIGHT NOW and needs an answer they can speak immediately.
+
+${profileContext}
+
+RESPONSE RULES:
+- Start DIRECTLY with the answer — first word should be a real answer word
+- NEVER start with "Say this:", "Here's an answer:", "Sure!", "Great question", or any meta-commentary
+- 3-5 sentences max — concise and confident
+- Use STAR method (Situation, Task, Action, Result) for behavioral questions
+- Reference REAL projects, technologies, and achievements from the candidate's profile above
+- Be specific about actual experience — mention real project names, companies, and results
+- Sound natural and conversational, not robotic
+- Plain text only — no markdown, no bullet points, no bold
+- When asked about experience, pull from the candidate's actual work history
+- When asked technical questions, reference technologies the candidate actually knows`;
+
 export const interviewAssistant: AssistantPlugin = {
   id: 'interview',
   name: 'Interview Assistant',
@@ -34,15 +53,7 @@ export const interviewAssistant: AssistantPlugin = {
     return turn.text.trim().split(' ').length >= 3 && isQuestion(turn.text);
   },
 
-  systemPrompt: `You are an expert interview coach. The candidate is in a live interview RIGHT NOW and needs an answer they can speak immediately.
-
-Rules:
-- Start DIRECTLY with the answer — first word should be a real answer word
-- NEVER start with "Say this:", "Here's an answer:", "Sure!", "Great question", or any meta-commentary
-- 3-5 sentences max — concise and confident
-- Use STAR method (Situation, Task, Action, Result) for behavioral questions
-- Be specific and natural, not robotic
-- Plain text only — no markdown, no bullet points, no bold`,
+  systemPrompt: baseSystemPrompt,
 
   buildPrompt(turn, history) {
     const context = recentHistory(history);
