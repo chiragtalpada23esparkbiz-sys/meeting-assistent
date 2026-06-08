@@ -47,9 +47,16 @@ export function setupIpcHandlers(): void {
   // Called by "Got it" button — clears dedup so next question is detected fresh
   ipcMain.handle('reset-last-question', () => { lastProcessedText = ''; });
 
+  // Window dragging (needed because focusable:false breaks native -webkit-app-region drag)
+  ipcMain.handle('set-window-position', (_event, x: number, y: number) => {
+    const win = BrowserWindow.getAllWindows()[0];
+    win?.setPosition(Math.round(x), Math.round(y));
+  });
+
   // Detection on/off toggle
   ipcMain.handle('start-detection', () => { detectionPaused = false; });
   ipcMain.handle('stop-detection',  () => { detectionPaused = true; });
+
 
   // ── Transcript routing with debounced fallback ──
   transcriptEvents.on('transcript', (msg: { type: string; text: string; speaker?: string | null }) => {

@@ -18,6 +18,7 @@ declare global {
       setAssistant: (id: string) => Promise<void>;
       resetAssistant: () => Promise<void>;
       resetLastQuestion: () => Promise<void>;
+      setWindowPosition: (x: number, y: number) => Promise<void>;
       startDetection: () => Promise<void>;
       stopDetection: () => Promise<void>;
       onSuggestionStart: (cb: (data: { question: string }) => void) => void;

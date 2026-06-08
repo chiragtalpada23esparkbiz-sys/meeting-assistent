@@ -44,6 +44,7 @@ function createWindow(): void {
     hasShadow: false,
     skipTaskbar: true,
     resizable: true,
+    focusable: false,
     // On Linux, hints to the WM that this is a floating utility — some X11 screen recorders skip toolbar-type windows
     ...(process.platform === 'linux' && { type: 'toolbar' as const }),
     webPreferences: {
@@ -68,6 +69,7 @@ function createWindow(): void {
   if (process.platform === 'darwin') {
     mainWindow.setHiddenInMissionControl(true);
   }
+
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 

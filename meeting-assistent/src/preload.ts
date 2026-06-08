@@ -35,6 +35,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('reset-assistant'),
   resetLastQuestion: (): Promise<void> =>
     ipcRenderer.invoke('reset-last-question'),
+  setWindowPosition: (x: number, y: number): Promise<void> =>
+    ipcRenderer.invoke('set-window-position', x, y),
   startDetection: (): Promise<void> =>
     ipcRenderer.invoke('start-detection'),
   stopDetection: (): Promise<void> =>

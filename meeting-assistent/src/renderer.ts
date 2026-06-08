@@ -2,8 +2,11 @@ import './index.css';
 import { MeetingRecorder } from './recorder';
 
 // DOM
-const assistantSelect = document.getElementById('assistant-select') as HTMLSelectElement;
-const micSelect       = document.getElementById('mic-select') as HTMLSelectElement;
+const titlebar          = document.querySelector('.titlebar') as HTMLElement;
+const assistantSelBtn   = document.getElementById('assistant-sel-btn') as HTMLButtonElement;
+const assistantSelList  = document.getElementById('assistant-sel-list') as HTMLDivElement;
+const micSelBtn         = document.getElementById('mic-sel-btn') as HTMLButtonElement;
+const micSelList        = document.getElementById('mic-sel-list') as HTMLDivElement;
 const content         = document.getElementById('content') as HTMLDivElement;
 const btnMinimize     = document.getElementById('btn-minimize') as HTMLButtonElement;
 const btnClose        = document.getElementById('btn-close') as HTMLButtonElement;
@@ -93,17 +96,63 @@ function renderTranscript(): void {
   transcriptEl.scrollTop = transcriptEl.scrollHeight;
 }
 
-// Selectors
+// ── Custom dropdowns (native <select> broken by focusable:false) ──
+let selectedMicId = '';
+let selectedAssistantId = '';
+
+function makeCustomSel(
+  btn: HTMLButtonElement,
+  list: HTMLDivElement,
+  items: { value: string; label: string }[],
+  currentValue: string,
+  onSelect: (value: string) => void,
+): void {
+  list.innerHTML = '';
+  items.forEach(({ value, label }) => {
+    const opt = document.createElement('button');
+    opt.className = 'custom-sel-opt' + (value === currentValue ? ' selected' : '');
+    opt.textContent = label;
+    opt.addEventListener('click', () => {
+      onSelect(value);
+      btn.textContent = label;
+      list.hidden = true;
+      list.querySelectorAll('.custom-sel-opt').forEach((o) => o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+    list.appendChild(opt);
+  });
+  btn.textContent = items.find((i) => i.value === currentValue)?.label ?? btn.textContent;
+}
+
+function toggleList(list: HTMLDivElement, otherList: HTMLDivElement): void {
+  otherList.hidden = true;
+  list.hidden = !list.hidden;
+}
+
+assistantSelBtn.addEventListener('click', () => toggleList(assistantSelList, micSelList));
+micSelBtn.addEventListener('click',       () => toggleList(micSelList, assistantSelList));
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+  if (!(e.target as HTMLElement).closest('.custom-sel')) {
+    assistantSelList.hidden = true;
+    micSelList.hidden = true;
+  }
+});
+
 async function loadAssistants(): Promise<void> {
   try {
-    const list = await window.electronAPI.getAssistants();
-    const active = await window.electronAPI.getActiveAssistant();
-    assistantSelect.innerHTML = '';
-    list.forEach(({ id, name }) => {
-      const opt = document.createElement('option');
-      opt.value = id; opt.textContent = name; opt.selected = id === active;
-      assistantSelect.appendChild(opt);
-    });
+    const [list, active] = await Promise.all([
+      window.electronAPI.getAssistants(),
+      window.electronAPI.getActiveAssistant(),
+    ]);
+    selectedAssistantId = active;
+    makeCustomSel(
+      assistantSelBtn, assistantSelList,
+      list.map(({ id, name }) => ({ value: id, label: name })),
+      active,
+      (id) => { selectedAssistantId = id; window.electronAPI.setAssistant(id); },
+    );
   } catch (err) { console.error('loadAssistants failed:', err); }
 }
 
@@ -112,19 +161,52 @@ async function loadMicDevices(): Promise<void> {
     const tmp = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
     tmp.getTracks().forEach((t) => t.stop());
     const devices = await navigator.mediaDevices.enumerateDevices();
-    micSelect.innerHTML = '';
-    devices.filter((d) => d.kind === 'audioinput').forEach((d) => {
-      const opt = document.createElement('option');
-      opt.value = d.deviceId;
-      opt.textContent = d.label || `Microphone ${micSelect.options.length + 1}`;
-      micSelect.appendChild(opt);
-    });
+    const mics = devices
+      .filter((d) => d.kind === 'audioinput')
+      .map((d, i) => ({ value: d.deviceId, label: d.label || `Microphone ${i + 1}` }));
+    if (mics.length) selectedMicId = mics[0].value;
+    makeCustomSel(
+      micSelBtn, micSelList,
+      mics,
+      selectedMicId,
+      (id) => { selectedMicId = id; },
+    );
   } catch (err) { console.warn('loadMicDevices failed:', err); }
 }
 
-assistantSelect.addEventListener('change', () => window.electronAPI.setAssistant(assistantSelect.value));
 loadAssistants();
 loadMicDevices();
+
+
+// ── JS drag (replaces -webkit-app-region: drag, broken by focusable:false) ──
+let dragging = false;
+let dragStartScreenX = 0, dragStartScreenY = 0;
+let winStartX = 0, winStartY = 0;
+
+titlebar.addEventListener('mousedown', (e) => {
+  // Don't start drag if clicking a button inside the titlebar
+  if ((e.target as HTMLElement).closest('button')) return;
+  dragging = true;
+  dragStartScreenX = e.screenX;
+  dragStartScreenY = e.screenY;
+  winStartX = window.screenX;
+  winStartY = window.screenY;
+  titlebar.classList.add('dragging');
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  window.electronAPI.setWindowPosition(
+    winStartX + (e.screenX - dragStartScreenX),
+    winStartY + (e.screenY - dragStartScreenY),
+  );
+});
+
+document.addEventListener('mouseup', () => {
+  if (!dragging) return;
+  dragging = false;
+  titlebar.classList.remove('dragging');
+});
 
 // Window controls
 btnMinimize.addEventListener('click', () => {
@@ -235,7 +317,7 @@ btnRecord.addEventListener('click', async () => {
   setDetectionState(true);
   await window.electronAPI.startDetection();
 
-  recorder = new MeetingRecorder({ onStatus: setStatus, micDeviceId: micSelect.value || undefined });
+  recorder = new MeetingRecorder({ onStatus: setStatus, micDeviceId: selectedMicId || undefined });
   try {
     await recorder.start();
     startTimer();
