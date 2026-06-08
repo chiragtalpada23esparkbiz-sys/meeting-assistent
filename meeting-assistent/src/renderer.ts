@@ -15,6 +15,7 @@ const btnRecord       = document.getElementById('btn-record') as HTMLButtonEleme
 const btnStop         = document.getElementById('btn-stop') as HTMLButtonElement;
 const btnPause        = document.getElementById('btn-pause') as HTMLButtonElement;
 const btnGotIt        = document.getElementById('btn-got-it') as HTMLButtonElement;
+const btnSnap         = document.getElementById('btn-snap') as HTMLButtonElement;
 const btnDetectStart  = document.getElementById('btn-detect-start') as HTMLButtonElement;
 const btnDetectStop   = document.getElementById('btn-detect-stop') as HTMLButtonElement;
 const statusEl        = document.getElementById('status') as HTMLElement;
@@ -257,6 +258,17 @@ window.electronAPI.onSuggestionError((err) => {
   cardBadge.className = 'card-badge';
   answerEl.textContent = `Error: ${err}`;
   setStatus(`AI error: ${err}`);
+});
+
+// Snap — capture screen and analyze with Claude vision
+btnSnap.addEventListener('click', async () => {
+  if (btnSnap.classList.contains('loading')) return;
+  btnSnap.classList.add('loading');
+  try {
+    await window.electronAPI.captureAndAnalyze();
+  } finally {
+    btnSnap.classList.remove('loading');
+  }
 });
 
 // Got it — dismiss answer, ready for next question

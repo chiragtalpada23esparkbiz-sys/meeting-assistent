@@ -3,7 +3,7 @@ import { getSystemAudioSource } from './systemAudio';
 import { uploadFinal } from './uploader';
 import { startSessions, sendMicPcm, sendSystemPcm, stopSessions, transcriptEvents } from './assemblyai';
 import { broadcastToExtension } from './localRelay';
-import { processTurn, setActiveAssistant, getActiveAssistantId, getAssistantList, resetHistory } from './assistantManager';
+import { processTurn, processScreenshot, setActiveAssistant, getActiveAssistantId, getAssistantList, resetHistory } from './assistantManager';
 import type { RecordingMetadata } from './types';
 
 // Debounce state — lives at module level so handlers can share it
@@ -46,6 +46,22 @@ export function setupIpcHandlers(): void {
 
   // Called by "Got it" button — clears dedup so next question is detected fresh
   ipcMain.handle('reset-last-question', () => { lastProcessedText = ''; });
+
+  // Screenshot capture → Claude vision analysis
+  ipcMain.handle('capture-and-analyze', async () => {
+    const sources = await desktopCapturer.getSources({
+      types: ['screen'],
+      thumbnailSize: { width: 1920, height: 1080 },
+    });
+    const source = sources[0];
+    if (!source) {
+      const win = BrowserWindow.getAllWindows()[0];
+      win?.webContents.send('suggestion-error', 'No screen source found');
+      return;
+    }
+    const imageBase64 = source.thumbnail.toJPEG(85).toString('base64');
+    await processScreenshot(imageBase64);
+  });
 
   // Window dragging (needed because focusable:false breaks native -webkit-app-region drag)
   ipcMain.handle('set-window-position', (_event, x: number, y: number) => {

@@ -53,6 +53,51 @@ export function resetHistory(): void {
   isStreaming = false;
 }
 
+export async function processScreenshot(imageBase64: string): Promise<void> {
+  const win = BrowserWindow.getAllWindows()[0];
+  if (!win) return;
+
+  win.webContents.send('suggestion-start', { question: 'Screenshot' });
+
+  try {
+    const apiKey = process.env.ANTHROPIC_API_KEY;
+    if (!apiKey || apiKey === 'your_anthropic_key_here') {
+      throw new Error('ANTHROPIC_API_KEY not set in .env');
+    }
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const Anthropic = require('@anthropic-ai/sdk').default ?? require('@anthropic-ai/sdk');
+    const client = new Anthropic({ apiKey });
+
+    const stream = client.messages.stream({
+      model: 'claude-opus-4-5',
+      max_tokens: 1024,
+      system: `You are an expert real-time assistant. The user shared a screenshot from their screen.
+Identify any question, problem, coding challenge, or requirement visible and respond directly and concisely.
+No meta-commentary — start immediately with the answer or solution.`,
+      messages: [{
+        role: 'user',
+        content: [
+          {
+            type: 'image',
+            source: { type: 'base64', media_type: 'image/jpeg', data: imageBase64 },
+          },
+          { type: 'text', text: 'What is the question or problem here? Answer it directly.' },
+        ],
+      }],
+    });
+
+    for await (const chunk of stream) {
+      if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+        win.webContents.send('suggestion-chunk', chunk.delta.text);
+      }
+    }
+
+    win.webContents.send('suggestion-done');
+  } catch (err) {
+    win.webContents.send('suggestion-error', (err as Error).message);
+  }
+}
+
 export async function processTurn(turn: Turn): Promise<void> {
   history.push(turn);
 

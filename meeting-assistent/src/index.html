@@ -49,15 +49,19 @@
           </div>
         </div>
 
+        <!-- Snap -->
+        <button id="btn-snap" class="btn btn-snap">⊙ Snap Screen → AI Answer</button>
+
         <!-- AI Suggestion — main focus -->
         <div class="card" id="suggestion-card">
           <div class="card-header">
             <span class="card-title">AI Suggestion</span>
-            <div class="detect-controls">
-              <button id="btn-detect-start" class="detect-btn">▶ Ready</button>
-              <button id="btn-detect-stop" class="detect-btn">■ Stop</button>
-              <span class="card-badge" id="card-badge">Waiting...</span>
-            </div>
+            <span class="card-badge" id="card-badge">Waiting...</span>
+          </div>
+          <div class="detect-row">
+            <span class="detect-label">Detection</span>
+            <button id="btn-detect-start" class="detect-btn">▶ Ready</button>
+            <button id="btn-detect-stop" class="detect-btn">■ Stop</button>
           </div>
           <div class="question-row" id="question-row">
             <span class="q-label">Q</span>
