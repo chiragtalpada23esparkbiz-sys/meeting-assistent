@@ -22,6 +22,8 @@ declare global {
       captureAndAnalyze: () => Promise<void>;
       startDetection: () => Promise<void>;
       stopDetection: () => Promise<void>;
+      setListeningMode: (mode: 'interviewer' | 'self') => Promise<void>;
+      getListeningMode: () => Promise<'interviewer' | 'self'>;
       onSuggestionStart: (cb: (data: { question: string }) => void) => void;
       onSuggestionChunk: (cb: (text: string) => void) => void;
       onSuggestionDone: (cb: () => void) => void;

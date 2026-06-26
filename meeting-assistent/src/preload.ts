@@ -43,6 +43,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('start-detection'),
   stopDetection: (): Promise<void> =>
     ipcRenderer.invoke('stop-detection'),
+  setListeningMode: (mode: 'interviewer' | 'self'): Promise<void> =>
+    ipcRenderer.invoke('set-listening-mode', mode),
+  getListeningMode: (): Promise<'interviewer' | 'self'> =>
+    ipcRenderer.invoke('get-listening-mode'),
 
   // Suggestion streaming events
   onSuggestionStart: (cb: (data: { question: string }) => void) =>

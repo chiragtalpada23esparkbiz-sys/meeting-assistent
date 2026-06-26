@@ -18,6 +18,7 @@ const btnGotIt        = document.getElementById('btn-got-it') as HTMLButtonEleme
 const btnSnap         = document.getElementById('btn-snap') as HTMLButtonElement;
 const btnDetectStart  = document.getElementById('btn-detect-start') as HTMLButtonElement;
 const btnDetectStop   = document.getElementById('btn-detect-stop') as HTMLButtonElement;
+const btnRepeatMode   = document.getElementById('btn-repeat-mode') as HTMLButtonElement;
 const statusEl        = document.getElementById('status') as HTMLElement;
 const timerEl         = document.getElementById('timer') as HTMLElement;
 const transcriptEl    = document.getElementById('transcript') as HTMLElement;
@@ -74,6 +75,15 @@ btnDetectStart.addEventListener('click', async () => {
 btnDetectStop.addEventListener('click', async () => {
   await window.electronAPI.stopDetection();
   setDetectionState(false);
+});
+
+let isRepeatMode = false;
+
+btnRepeatMode.addEventListener('click', async () => {
+  isRepeatMode = !isRepeatMode;
+  await window.electronAPI.setListeningMode(isRepeatMode ? 'self' : 'interviewer');
+  btnRepeatMode.classList.toggle('is-repeat-state', isRepeatMode);
+  setStatus(isRepeatMode ? 'Repeat mode — speak the question into your mic' : 'Ready');
 });
 
 function speakerLabel(s: string): string { return s === 'A' ? 'You' : 'Interviewer'; }
@@ -325,6 +335,10 @@ btnRecord.addEventListener('click', async () => {
   cardBadge.textContent = 'Waiting...';
   cardBadge.className = 'card-badge';
   await window.electronAPI.resetAssistant();
+
+  isRepeatMode = false;
+  btnRepeatMode.classList.remove('is-repeat-state');
+  await window.electronAPI.setListeningMode('interviewer');
 
   setDetectionState(true);
   await window.electronAPI.startDetection();

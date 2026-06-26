@@ -3,7 +3,7 @@ import { getSystemAudioSource } from './systemAudio';
 import { uploadFinal } from './uploader';
 import { startSessions, sendMicPcm, sendSystemPcm, stopSessions, transcriptEvents } from './assemblyai';
 import { broadcastToExtension } from './localRelay';
-import { processTurn, processScreenshot, setActiveAssistant, getActiveAssistantId, getAssistantList, resetHistory } from './assistantManager';
+import { processTurn, processScreenshot, setActiveAssistant, getActiveAssistantId, getAssistantList, resetHistory, setListeningMode, getListeningMode } from './assistantManager';
 import type { RecordingMetadata } from './types';
 
 // Debounce state — lives at module level so handlers can share it
@@ -72,6 +72,14 @@ export function setupIpcHandlers(): void {
   // Detection on/off toggle
   ipcMain.handle('start-detection', () => { detectionPaused = false; });
   ipcMain.handle('stop-detection',  () => { detectionPaused = true; });
+
+  // Listening mode — 'interviewer' (default) listens to speaker B (system audio)
+  //                  'self' listens to speaker A (mic) so user can repeat the question
+  ipcMain.handle('set-listening-mode', (_event, mode: 'interviewer' | 'self') => {
+    lastProcessedText = ''; // clear dedup so the re-stated question fires fresh
+    setListeningMode(mode);
+  });
+  ipcMain.handle('get-listening-mode', () => getListeningMode());
 
 
   // ── Transcript routing with debounced fallback ──

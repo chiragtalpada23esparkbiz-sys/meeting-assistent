@@ -13,7 +13,7 @@ function streamCompletion(systemPrompt: string, userContent: string) {
   const Anthropic = require('@anthropic-ai/sdk').default ?? require('@anthropic-ai/sdk');
   const client = new Anthropic({ apiKey });
   return client.messages.stream({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 300,
     system: [
       {
@@ -27,8 +27,9 @@ function streamCompletion(systemPrompt: string, userContent: string) {
 }
 
 let activeAssistant: AssistantPlugin = ASSISTANTS[0];
-const mySpeaker = 'A'; // mic stream is always Speaker A = "You"
+let mySpeaker = 'A'; // 'A' = normal (listen to interviewer B), 'B' = repeat mode (listen to mic A)
 const history: Turn[] = [];
+let savedInterviewerHistory: Turn[] = []; // snapshot saved when entering mic mode
 let isStreaming = false; // Prevent concurrent responses
 
 export function setActiveAssistant(id: string): void {
@@ -50,7 +51,27 @@ export function getAssistantList(): Array<{ id: string; name: string; descriptio
 
 export function resetHistory(): void {
   history.length = 0;
+  savedInterviewerHistory = [];
   isStreaming = false;
+}
+
+export type ListeningMode = 'interviewer' | 'self';
+
+export function setListeningMode(mode: ListeningMode): void {
+  if (mode === 'self') {
+    savedInterviewerHistory = [...history]; // snapshot interviewer context
+    history.length = 0;                     // fresh slate for mic question
+  } else {
+    history.length = 0;
+    history.push(...savedInterviewerHistory); // restore interviewer context
+    savedInterviewerHistory = [];
+  }
+  mySpeaker = mode === 'self' ? 'B' : 'A';
+  console.log(`[Assistant] Listening mode: ${mode} (mySpeaker=${mySpeaker})`);
+}
+
+export function getListeningMode(): ListeningMode {
+  return mySpeaker === 'B' ? 'self' : 'interviewer';
 }
 
 export async function processScreenshot(imageBase64: string): Promise<void> {
@@ -69,7 +90,7 @@ export async function processScreenshot(imageBase64: string): Promise<void> {
     const client = new Anthropic({ apiKey });
 
     const stream = client.messages.stream({
-      model: 'claude-opus-4-5',
+      model: 'claude-opus-4-8',
       max_tokens: 1024,
       system: `You are an expert real-time assistant. The user shared a screenshot from their screen.
 Identify any question, problem, coding challenge, or requirement visible and respond directly and concisely.

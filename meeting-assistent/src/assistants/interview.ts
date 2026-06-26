@@ -26,21 +26,28 @@ function recentHistory(history: Turn[], n = 6): string {
 
 const profileContext = buildProfileContext();
 
-const baseSystemPrompt = `You are an expert interview coach. The candidate is in a live interview RIGHT NOW and needs an answer they can speak immediately.
+const baseSystemPrompt = `You are helping a candidate respond in a live interview RIGHT NOW. Write what they should actually say out loud — not a polished essay, but words a real person would speak.
 
 ${profileContext}
 
-RESPONSE RULES:
-- Start DIRECTLY with the answer — first word should be a real answer word
-- NEVER start with "Say this:", "Here's an answer:", "Sure!", "Great question", or any meta-commentary
-- 3-5 sentences max — concise and confident
-- Use STAR method (Situation, Task, Action, Result) for behavioral questions
-- Reference REAL projects, technologies, and achievements from the candidate's profile above
-- Be specific about actual experience — mention real project names, companies, and results
-- Sound natural and conversational, not robotic
-- Plain text only — no markdown, no bullet points, no bold
-- When asked about experience, pull from the candidate's actual work history
-- When asked technical questions, reference technologies the candidate actually knows`;
+THE GOAL: Sound like a thoughtful engineer recalling something from memory, not reciting a prepared answer. Interviewers penalize scripted delivery. A slightly imperfect, present answer beats a perfectly structured robotic one.
+
+HOW TO WRITE THE ANSWER:
+- Write as spoken words — short sentences, natural rhythm, the way someone actually talks
+- Don't follow a rigid STAR structure. Let the story flow organically: jump in somewhere real, build naturally, land on the outcome
+- It's okay to briefly wander — a small aside ("we had this weird naming convention for teams so I forget exactly what they called it") makes it sound lived-in, not rehearsed
+- If a detail is fuzzy, handwave it gracefully: "I don't remember the exact number but it was somewhere around..." or "I'd have to double-check the name but roughly..."
+- Vary sentence length. Mix a short punchy line with a longer one
+- Use first-person, casual connectors: "so", "and then", "which meant", "honestly", "the thing is"
+- Reference real projects, companies, and tech from the candidate's profile — but don't over-specify if it would sound like you're reading from a resume
+- 3–5 sentences max. Stop before it becomes a monologue
+
+NEVER DO:
+- Start with "Sure!", "Great question", "Absolutely", "Certainly", or any warm-up filler
+- Start with "Say this:" or any meta-instruction
+- Use bullet points, markdown, or headers
+- Open with a perfectly structured "In my role at X, I was tasked with Y..." — that's the robotic formula
+- Sound like every sentence was planned in advance`;
 
 export const interviewAssistant: AssistantPlugin = {
   id: 'interview',
@@ -57,6 +64,6 @@ export const interviewAssistant: AssistantPlugin = {
 
   buildPrompt(turn, history) {
     const context = recentHistory(history);
-    return `Recent conversation:\n${context}\n\nThe interviewer just asked:\n"${turn.text}"\n\nProvide a strong, concise answer I can say right now.`;
+    return `Recent conversation:\n${context}\n\nThe interviewer just asked:\n"${turn.text}"\n\nWrite what I should say out loud right now. Make it sound like a real person recalling something — natural, slightly imperfect, not scripted.`;
   },
 };
