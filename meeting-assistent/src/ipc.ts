@@ -7,10 +7,11 @@ import { processTurn, processScreenshot, setActiveAssistant, getActiveAssistantI
 import type { RecordingMetadata } from './types';
 
 // Debounce state — lives at module level so handlers can share it
-let partialTimer: ReturnType<typeof setTimeout> | null = null;
-let lastPartialText = '';
+let interviewerTimer: ReturnType<typeof setTimeout> | null = null;
+let accumulatedInterviewerText = ''; // Accumulate interviewer speech before processing
 let lastProcessedText = '';
 let detectionPaused = false; // Stop/Ready toggle
+const INTERVIEWER_SILENCE_MS = 1500; // Wait for silence before processing question
 
 function safeProcess(speaker: string, text: string): void {
   if (detectionPaused) return;
@@ -42,10 +43,10 @@ export function setupIpcHandlers(): void {
   ipcMain.handle('get-assistants', () => getAssistantList());
   ipcMain.handle('get-active-assistant', () => getActiveAssistantId());
   ipcMain.handle('set-assistant', (_event, id: string) => setActiveAssistant(id));
-  ipcMain.handle('reset-assistant', () => { resetHistory(); lastProcessedText = ''; });
+  ipcMain.handle('reset-assistant', () => { resetHistory(); lastProcessedText = ''; accumulatedInterviewerText = ''; });
 
   // Called by "Got it" button — clears dedup so next question is detected fresh
-  ipcMain.handle('reset-last-question', () => { lastProcessedText = ''; });
+  ipcMain.handle('reset-last-question', () => { lastProcessedText = ''; accumulatedInterviewerText = ''; });
 
   // Screenshot capture → Claude vision analysis
   ipcMain.handle('capture-and-analyze', async () => {
@@ -97,12 +98,15 @@ export function setupIpcHandlers(): void {
   //                  'self' listens to speaker A (mic) so user can repeat the question
   ipcMain.handle('set-listening-mode', (_event, mode: 'interviewer' | 'self') => {
     lastProcessedText = ''; // clear dedup so the re-stated question fires fresh
+    accumulatedInterviewerText = '';
     setListeningMode(mode);
   });
   ipcMain.handle('get-listening-mode', () => getListeningMode());
 
 
-  // ── Transcript routing with debounced fallback ──
+  // ── Transcript routing with accumulation for interviewer ──
+  // Interviewer speech (speaker B) is accumulated and only processed after silence
+  // This ensures we capture the full question before triggering the assistant
   transcriptEvents.on('transcript', (msg: { type: string; text: string; speaker?: string | null }) => {
     const win = BrowserWindow.getAllWindows()[0];
     if (win) win.webContents.send('transcript-update', msg);
@@ -110,24 +114,34 @@ export function setupIpcHandlers(): void {
 
     const speaker = msg.speaker ?? 'A';
 
-    if (msg.type === 'final' && msg.text) {
-      // Cancel pending debounce — we got the real final
-      if (speaker === 'B' && partialTimer) {
-        clearTimeout(partialTimer);
-        partialTimer = null;
-      }
-      safeProcess(speaker, msg.text);
+    // Speaker A (user) — process immediately
+    if (speaker === 'A' && msg.type === 'final' && msg.text) {
+      safeProcess('A', msg.text);
+      return;
     }
 
-    // Debounce fallback: treat interviewer partial as final after 800ms silence
-    // This catches questions even when end_of_turn fires late
-    if (msg.type === 'partial' && speaker === 'B' && msg.text) {
-      lastPartialText = msg.text;
-      if (partialTimer) clearTimeout(partialTimer);
-      partialTimer = setTimeout(() => {
-        partialTimer = null;
-        safeProcess('B', lastPartialText);
-      }, 800);
+    // Speaker B (interviewer) — accumulate and wait for silence
+    if (speaker === 'B' && msg.text) {
+      // Reset timer on any new speech
+      if (interviewerTimer) {
+        clearTimeout(interviewerTimer);
+        interviewerTimer = null;
+      }
+
+      if (msg.type === 'final') {
+        // Append final to accumulated text
+        accumulatedInterviewerText += (accumulatedInterviewerText ? ' ' : '') + msg.text;
+      }
+
+      // Start silence timer — process after no speech for INTERVIEWER_SILENCE_MS
+      const textToProcess = msg.type === 'final' ? accumulatedInterviewerText : msg.text;
+      interviewerTimer = setTimeout(() => {
+        interviewerTimer = null;
+        if (textToProcess) {
+          safeProcess('B', textToProcess);
+          accumulatedInterviewerText = ''; // Reset for next question
+        }
+      }, INTERVIEWER_SILENCE_MS);
     }
   });
 }

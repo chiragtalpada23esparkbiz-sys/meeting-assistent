@@ -9,6 +9,8 @@ type Transcriber = ReturnType<InstanceType<typeof AssemblyAI>['streaming']['tran
 let micTranscriber: Transcriber | null = null;
 let systemTranscriber: Transcriber | null = null;
 let sessionsActive = false;
+let reconnecting = false;
+let currentApiKey: string | null = null;
 
 function createTranscriber(apiKey: string): Transcriber {
   const client = new AssemblyAI({ apiKey });
@@ -20,6 +22,57 @@ function createTranscriber(apiKey: string): Transcriber {
     minTurnSilence: 560,
     endOfTurnConfidenceThreshold: 0.45,
   });
+}
+
+async function reconnectSessions(): Promise<void> {
+  if (reconnecting || !currentApiKey) return;
+  reconnecting = true;
+  console.log('[AssemblyAI] Attempting to reconnect...');
+
+  // Close any existing connections
+  await Promise.allSettled([
+    micTranscriber?.close(),
+    systemTranscriber?.close(),
+  ]);
+
+  // Wait a bit before reconnecting
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  if (!sessionsActive) {
+    // User stopped recording during reconnect delay
+    reconnecting = false;
+    return;
+  }
+
+  try {
+    micTranscriber = createTranscriber(currentApiKey);
+    systemTranscriber = createTranscriber(currentApiKey);
+
+    attachHandlers(micTranscriber, 'A', 'Mic');
+    attachHandlers(systemTranscriber, 'B', 'System');
+
+    await Promise.all([
+      micTranscriber.connect(),
+      systemTranscriber.connect(),
+    ]);
+
+    console.log('[AssemblyAI] Reconnected successfully');
+    transcriptEvents.emit('transcript', {
+      type: 'final',
+      text: '[Reconnected]',
+      speaker: 'A',
+    });
+  } catch (err) {
+    console.error('[AssemblyAI] Reconnection failed:', (err as Error).message);
+    // Try again after a longer delay
+    setTimeout(() => {
+      reconnecting = false;
+      if (sessionsActive) reconnectSessions();
+    }, 3000);
+    return;
+  }
+
+  reconnecting = false;
 }
 
 function attachHandlers(t: Transcriber, speaker: 'A' | 'B', label: string): void {
@@ -42,14 +95,10 @@ function attachHandlers(t: Transcriber, speaker: 'A' | 'B', label: string): void
 
   t.on('close', (code: number) => {
     console.log(`[AssemblyAI] ${label} closed — code: ${code}`);
-    // If socket closes unexpectedly while sessions should be active, notify UI
-    if (sessionsActive) {
-      console.warn(`[AssemblyAI] ${label} closed unexpectedly, marking sessions inactive`);
-      sessionsActive = false;
-      transcriptEvents.emit('transcript', {
-        type: 'error',
-        text: `Connection lost (${label}). Please restart recording.`,
-      });
+    // If socket closes unexpectedly while sessions should be active, try to reconnect
+    if (sessionsActive && !reconnecting) {
+      console.warn(`[AssemblyAI] ${label} closed unexpectedly, attempting reconnect...`);
+      reconnectSessions();
     }
   });
 }
@@ -60,6 +109,10 @@ export async function startSessions(sessionId: string): Promise<void> {
     transcriptEvents.emit('transcript', { type: 'error', text: 'ASSEMBLYAI_API_KEY not set in .env' });
     return;
   }
+
+  // Save API key for reconnection
+  currentApiKey = apiKey;
+  reconnecting = false;
 
   micTranscriber = createTranscriber(apiKey);
   systemTranscriber = createTranscriber(apiKey);
@@ -77,30 +130,32 @@ export async function startSessions(sessionId: string): Promise<void> {
 }
 
 export function sendMicPcm(buffer: ArrayBuffer): void {
-  if (!sessionsActive || !micTranscriber) return;
+  if (!sessionsActive || !micTranscriber || reconnecting) return;
   try {
     micTranscriber.sendAudio(buffer);
   } catch (err) {
-    // Socket closed unexpectedly - stop sending
-    console.warn('[AssemblyAI] Mic socket closed unexpectedly, stopping sends');
-    sessionsActive = false;
+    // Socket closed unexpectedly - trigger reconnect
+    console.warn('[AssemblyAI] Mic socket error, triggering reconnect');
+    if (!reconnecting) reconnectSessions();
   }
 }
 
 export function sendSystemPcm(buffer: ArrayBuffer): void {
-  if (!sessionsActive || !systemTranscriber) return;
+  if (!sessionsActive || !systemTranscriber || reconnecting) return;
   try {
     systemTranscriber.sendAudio(buffer);
   } catch (err) {
-    // Socket closed unexpectedly - stop sending
-    console.warn('[AssemblyAI] System socket closed unexpectedly, stopping sends');
-    sessionsActive = false;
+    // Socket closed unexpectedly - trigger reconnect
+    console.warn('[AssemblyAI] System socket error, triggering reconnect');
+    if (!reconnecting) reconnectSessions();
   }
 }
 
 export async function stopSessions(): Promise<void> {
-  // Set flag first to prevent any incoming PCM from being sent
+  // Set flags first to prevent any incoming PCM from being sent and stop reconnection
   sessionsActive = false;
+  reconnecting = false;
+  currentApiKey = null;
 
   await Promise.allSettled([
     micTranscriber?.close(),
