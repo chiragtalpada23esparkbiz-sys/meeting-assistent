@@ -193,30 +193,41 @@ loadMicDevices();
 let dragging = false;
 let dragStartScreenX = 0, dragStartScreenY = 0;
 let winStartX = 0, winStartY = 0;
+let winWidth = 0, winHeight = 0;
 
-titlebar.addEventListener('mousedown', (e) => {
+titlebar.addEventListener('mousedown', async (e) => {
   // Don't start drag if clicking a button inside the titlebar
   if ((e.target as HTMLElement).closest('button')) return;
   dragging = true;
   dragStartScreenX = e.screenX;
   dragStartScreenY = e.screenY;
-  winStartX = window.screenX;
-  winStartY = window.screenY;
+  // Capture full bounds at drag start to preserve exact size throughout drag
+  const bounds = await window.electronAPI.getWindowBounds();
+  winStartX = bounds.x;
+  winStartY = bounds.y;
+  winWidth = bounds.width;
+  winHeight = bounds.height;
+  // Disable resize during drag to hide dimension tooltip on Windows
+  await window.electronAPI.dragStart();
   titlebar.classList.add('dragging');
 });
 
 document.addEventListener('mousemove', (e) => {
   if (!dragging) return;
-  window.electronAPI.setWindowPosition(
+  window.electronAPI.setWindowBounds(
     winStartX + (e.screenX - dragStartScreenX),
     winStartY + (e.screenY - dragStartScreenY),
+    winWidth,
+    winHeight,
   );
 });
 
-document.addEventListener('mouseup', () => {
+document.addEventListener('mouseup', async () => {
   if (!dragging) return;
   dragging = false;
   titlebar.classList.remove('dragging');
+  // Re-enable resize after drag
+  await window.electronAPI.dragEnd();
 });
 
 // Window controls
@@ -251,7 +262,6 @@ window.electronAPI.onSuggestionChunk((text) => {
   // Render from full buffer so markdown across chunk boundaries works
   answerEl.innerHTML = renderMarkdown(rawAnswerBuffer);
   answerEl.classList.add('has-text');
-  answerEl.scrollTop = answerEl.scrollHeight;
 });
 
 window.electronAPI.onSuggestionDone(() => {

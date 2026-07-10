@@ -35,8 +35,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('reset-assistant'),
   resetLastQuestion: (): Promise<void> =>
     ipcRenderer.invoke('reset-last-question'),
-  setWindowPosition: (x: number, y: number): Promise<void> =>
-    ipcRenderer.invoke('set-window-position', x, y),
+  getWindowBounds: (): Promise<{ x: number; y: number; width: number; height: number }> =>
+    ipcRenderer.invoke('get-window-bounds'),
+  setWindowBounds: (x: number, y: number, width: number, height: number): Promise<void> =>
+    ipcRenderer.invoke('set-window-bounds', x, y, width, height),
+  dragStart: (): Promise<void> => ipcRenderer.invoke('drag-start'),
+  dragEnd: (): Promise<void> => ipcRenderer.invoke('drag-end'),
   captureAndAnalyze: (): Promise<void> =>
     ipcRenderer.invoke('capture-and-analyze'),
   startDetection: (): Promise<void> =>

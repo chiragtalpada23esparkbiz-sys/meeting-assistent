@@ -64,9 +64,29 @@ export function setupIpcHandlers(): void {
   });
 
   // Window dragging (needed because focusable:false breaks native -webkit-app-region drag)
-  ipcMain.handle('set-window-position', (_event, x: number, y: number) => {
+  // Return full bounds to preserve exact size during drag (avoids DPI scaling issues on Windows)
+  ipcMain.handle('get-window-bounds', () => {
     const win = BrowserWindow.getAllWindows()[0];
-    win?.setPosition(Math.round(x), Math.round(y));
+    if (!win) return { x: 0, y: 0, width: 400, height: 580 };
+    return win.getBounds();
+  });
+
+  ipcMain.handle('drag-start', () => {
+    const win = BrowserWindow.getAllWindows()[0];
+    if (!win) return;
+    win.setResizable(false);
+  });
+
+  ipcMain.handle('drag-end', () => {
+    const win = BrowserWindow.getAllWindows()[0];
+    if (!win) return;
+    win.setResizable(true);
+  });
+
+  ipcMain.handle('set-window-bounds', (_event, x: number, y: number, width: number, height: number) => {
+    const win = BrowserWindow.getAllWindows()[0];
+    if (!win) return;
+    win.setBounds({ x: Math.round(x), y: Math.round(y), width, height });
   });
 
   // Detection on/off toggle

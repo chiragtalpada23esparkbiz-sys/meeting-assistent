@@ -18,7 +18,10 @@ declare global {
       setAssistant: (id: string) => Promise<void>;
       resetAssistant: () => Promise<void>;
       resetLastQuestion: () => Promise<void>;
-      setWindowPosition: (x: number, y: number) => Promise<void>;
+      getWindowBounds: () => Promise<{ x: number; y: number; width: number; height: number }>;
+      setWindowBounds: (x: number, y: number, width: number, height: number) => Promise<void>;
+      dragStart: () => Promise<void>;
+      dragEnd: () => Promise<void>;
       captureAndAnalyze: () => Promise<void>;
       startDetection: () => Promise<void>;
       stopDetection: () => Promise<void>;
